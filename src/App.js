@@ -10,7 +10,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Card = styled.div`
+const Card = styled(animated.div)`
   display: flex;
   justify-content: center;
   background-color: green;
@@ -24,7 +24,7 @@ const Card = styled.div`
 `;
 
 export default function App() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const transition = useTransition(show, {
     from: { x: -100, y: 800, opacity: 0 },
     enter: { x: 0, y: 0, opacity: 1 },
@@ -32,20 +32,17 @@ export default function App() {
   });
   return (
     <Container>
-      <h1
-        onClick={() => {
-          setShow((v) => !v);
-        }}
-      >
-        Spring Lib
-      </h1>
+      <h1>Spring Lib</h1>
       {transition((style, item) =>
         item ? (
-          <animated.div style={style}>
-            <Card>
-              <p>Hier ist eine Karte</p>
-            </Card>
-          </animated.div>
+          <Card
+            style={style}
+            onClick={() => {
+              setShow(false);
+            }}
+          >
+            <p>Hier ist eine Karte</p>
+          </Card>
         ) : (
           ""
         )
